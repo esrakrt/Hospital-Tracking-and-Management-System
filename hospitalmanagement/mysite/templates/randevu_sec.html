@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Randevu Seç</title>
+</head>
+<body>
+    <h1>Randevu Seç</h1>
+    {% if uygun_randevular %}
+    <form method="post" action="{% url 'randevu_sec' %}">
+        {% csrf_token %}
+        <input type="hidden" name="doktor_id" value="{{ doktor_id }}">
+        <select name="randevu">
+            {% for randevu in uygun_randevular %}
+                <option value="{{ randevu.0 }} {{ randevu.1 }}">{{ randevu.0 }} {{ randevu.1 }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Randevu Al</button>
+    </form>
+    
+    {% else %}
+        <p>Üzgünüz, uygun randevu bulunamadı.</p>
+    {% endif %}
+    <form method="get" action="{% url 'home' %}">
+        <button type="submit">Ana Sayfaya Dön</button>
+    </form>
+</body>
+</html>

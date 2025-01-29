@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Yönetici Girişi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff69b4;
+            text-align: center;
+        }
+        button {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+            background-color: #ffb6c1;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c71585;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Yönetici Paneli</h1>
+        <button onclick="location.href='/hasta_ekle/'">Hasta Ekle</button>
+        <button onclick="location.href='/doktor_ekle/'">Doktor Ekle</button>
+        <button onclick="location.href='/rapor_ekle/'">Rapor Ekle</button>
+        <button onclick="location.href='/rapor_sil/'">Rapor Sil</button>
+        <button onclick="location.href='/hasta_listele/'">Hasta Listele</button>
+        <button onclick="location.href='/doktor_listele/'">Doktor Listele</button>
+        <form method="get" action="{% url 'home' %}">
+            <button type="submit">Ana Sayfaya Dön</button>
+        </form>
+    </div>
+</body>
+</html>

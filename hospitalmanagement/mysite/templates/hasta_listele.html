@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hasta Listesi</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hasta Listesi</h1>
+    <table>
+        <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Cinsiyet</th>
+            <th>Telefon Numarası</th>
+            <th>Adres</th>
+            <th>Doğum Tarihi</th>
+            <th>İşlemler</th>
+        </tr>
+        {% for hasta in hastalar %}
+            <tr>
+                <td>{{ hasta.1 }}</td>
+                <td>{{ hasta.2 }}</td>
+                <td>{{ hasta.4 }}</td>
+                <td>{{ hasta.5 }}</td>
+                <td>{{ hasta.6 }}</td>
+                <td>{{ hasta.3 }}</td>
+                <td>
+                    <a href="{% url 'hasta_sil' hasta.0 %}">Sil</a>
+                    <a href="{% url 'hasta_duzenle' hasta.0 %}">Düzenle</a>
+                    <a href="{% url 'rapor_ekle' hasta.0 %}">Rapor Ekle</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <form method="get" action="{% url 'home' %}">
+        <button type="submit">Ana Sayfaya Dön</button>
+    </form>
+</body>
+</html>

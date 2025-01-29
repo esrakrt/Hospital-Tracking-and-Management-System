@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Randevularım</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color:#ff69b4 ;
+            text-align: center;
+        }
+        form {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"], button {
+            display: block;
+            width: 100%;
+            background-color:#ffb6c1 ;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover, button:hover {
+            background-color: #c71585;
+        }
+        /* Ana Sayfaya Dön butonu için özel stil */
+        .home-button {
+            background-color: #c71585;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Randevularım</h1>
+    {% for randevu in randevular %}
+        <p>
+            Randevu ID: {{ randevu.0 }}<br>
+            Randevu Tarihi: {{ randevu.1 }}<br>
+            Randevu Saati: {{ randevu.2 }}<br>
+            Doktor Adı: {{ randevu.3 }}<br>
+            Doktor Soyadı: {{ randevu.4 }}<br>
+            Uzmanlık Alanı: {{ randevu.5 }}<br>
+            Hastane: {{ randevu.6 }}
+            <form method="post" action="{% url 'randevu_sil' %}">
+                {% csrf_token %}
+                <input type="hidden" name="randevu_id" value="{{ randevu.0 }}">
+                <input type="submit" value="İptal Et">
+            </form>
+            <form method="get" action="{% url 'randevu_duzenle' randevu_id=randevu.0 %}">
+                <input type="submit" value="Düzenle">
+            </form>
+            
+        </p>
+    {% endfor %}
+    <form method="get" action="{% url 'home' %}">
+        <button type="submit">Ana Sayfaya Dön</button>
+    </form>
+</body>
+</html>

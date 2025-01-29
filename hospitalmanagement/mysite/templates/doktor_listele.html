@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doktor Listesi</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Doktor Listesi</h1>
+    
+    <table>
+        <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Uzmanlık Alanı</th>
+            <th>Çalıştığı Hastane</th>
+            <th>İşlemler</th>
+        </tr>
+        {% for doktor in doktorlar %}
+            <tr>
+                <td>{{ doktor.1 }}</td>
+                <td>{{ doktor.2 }}</td>
+                <td>{{ doktor.3 }}</td>
+                <td>{{ doktor.4 }}</td>
+                <td>
+                    <a href="{% url 'doktor_sil' doktor.0 %}">Sil</a>
+                    <a href="{% url 'doktor_duzenle' doktor.0 %}">Düzenle</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <form method="get" action="{% url 'home' %}">
+        <button type="submit">Ana Sayfaya Dön</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hasta Giriş Yaptı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color:#ff69b4 ;
+            text-align: center;
+        }
+        form {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            background-color: #ffb6c1;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #c71585;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Hasta Giriş Yaptı</h1>
+        <form method="get" action="{% url 'randevu_ara' %}">
+            <button type="submit">Randevu Ara</button>
+        </form>
+        <form method="get" action="{% url 'randevu_listele' %}">
+            <button type="submit">Randevu Listele</button>
+        </form>
+        <form method="get" action="{% url 'hasta_guncelle' %}">
+            <button type="submit">Bilgileri Güncelle</button>
+        </form>
+        <form method="get" action="{% url 'rapor_goruntule' %}">
+            <button type="submit">Rapor Görüntüle</button>
+        </form>
+        <form method="get" action="{% url 'home' %}">
+            <button type="submit">Ana Sayfaya Dön</button>
+        </form>
+    </div>
+</body>
+</html>

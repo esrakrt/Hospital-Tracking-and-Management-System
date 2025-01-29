@@ -1,0 +1,105 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Randevu Ara</title>
+        <script src="{% static 'js/main.js' %}"></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f0f0f0;
+            }
+            h1 {
+                color: #ff69b4;
+                text-align: center;
+                padding: 20px;
+            }
+            form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 20px;
+            }
+            input, select, button {
+                margin: 10px;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+            }
+            button {
+                background-color: #ffb6c1;
+                color: white;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #ff83a1;
+            }
+        </style>
+    </head>
+<body>
+    <h1>Randevu Ara</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="doktor_adi" placeholder="Doktor Adı">
+        <input type="text" name="uzmanlik_alani" placeholder="Uzmanlık Alanı">
+        <input type="text" name="hastane_adi" placeholder="Hastane Adı">
+        <button type="submit">Ara</button>
+    </form>
+    {% if error %}
+        <p><strong>{{ error }}</strong></p>
+    {% elif randevular %}
+    {% for randevu in randevular %}
+        <form method="post" action="{% url 'randevu_sec' %}">
+            {% csrf_token %}
+            <input type="hidden" name="doktor_id" value="{{ randevu.0 }}">
+            <input type="date" id="randevu_tarihi" name="randevu_tarihi" required>
+            <select name="randevu_saati" required>
+                <option value="">Saat Seçin</option>
+                <option value="10:00">10:00</option>
+                <option value="11:00">11:00</option>
+                <option value="12:00">12:00</option>
+                <option value="13:00">13:00</option>
+                <option value="14:00">14:00</option>
+                <option value="15:00">15:00</option>
+                <option value="16:00">16:00</option>
+                <option value="17:00">17:00</option>
+            </select>
+            <input type="submit" value="Randevu Seç: {{ randevu.1 }} {{ randevu.2 }} - Uzmanlık Alanı: {{ randevu.3 }} - Hastane: {{ randevu.4 }}">
+        </form>
+    {% endfor %}
+    <form method="get" action="{% url 'home' %}">
+        <button type="submit">Ana Sayfaya Dön</button>
+    </form>
+    <script>
+        var today = new Date();
+        var yyyy = today.getFullYear();
+        var minDate = yyyy + '-06-01';  // Haziran ayının ilk günü
+        var maxDate = yyyy + '-06-30';  // Haziran ayının son günü
+        document.getElementById("randevu_tarihi").setAttribute("min", minDate);
+        document.getElementById("randevu_tarihi").setAttribute("max", maxDate);
+    
+        // Hafta sonlarına randevu alınamamasını sağlamak için bir event listener ekleyelim
+        document.getElementById("randevu_tarihi").addEventListener("change", function() {
+            var chosenDate = new Date(this.value);
+            var dayOfWeek = chosenDate.getDay();
+            if (dayOfWeek == 0 || dayOfWeek == 6) {  // 0: Pazar, 6: Cumartesi
+                alert("Hafta sonlarına randevu alınamaz. Lütfen başka bir tarih seçin.");
+                this.value = '';
+            }
+        });
+    </script>
+    
+</body>
+</html>
+
+
+    {% endif %}
+    <form method="get" action="{% url 'home' %}">
+        <button type="submit">Ana Sayfaya Dön</button>
+    </form>
+</body>
+</html>

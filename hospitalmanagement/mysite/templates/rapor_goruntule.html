@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Raporları Görüntüle</title>
+</head>
+<body>
+    <h1>Raporları Görüntüle</h1>
+    {% for rapor in raporlar %}
+        <p><a href="{{ rapor.0 }}" target="_blank">Rapor Görüntüle</a></p>
+    {% endfor %}
+    <form method="get" action="{% url 'hasta_giris' %}">
+        <button type="submit">Hasta Girişine Dön</button>
+    </form>
+</body>
+</html>

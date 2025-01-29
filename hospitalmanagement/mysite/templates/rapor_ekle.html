@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rapor Ekle</title>
+</head>
+<body>
+    <h1>Rapor Ekle</h1>
+    <form method="post" action="{% url 'rapor_ekle' hasta_id %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="rapor_url">Rapor Görüntü URL:</label><br>
+        <input type="text" id="rapor_url" name="rapor_url"><br>
+        <input type="submit" value="Raporu Kaydet">
+    </form>
+    <h2>Mevcut Raporlar</h2>
+    {% for rapor in raporlar %}
+        <p>Rapor ID: {{ rapor.0 }}</p>
+        <p>Rapor URL: <a href="{{ rapor.3 }}" target="_blank">{{ rapor.3 }}</a></p>
+        <form method="post" action="{% url 'rapor_sil' rapor.0 %}">
+            {% csrf_token %}
+            <input type="submit" value="Sil">
+        </form>
+        <hr>
+    {% endfor %}
+    <form method="get" action="{% url 'hasta_listele' %}">
+        <button type="submit">Hasta Listesine Dön</button>
+    </form>
+</body>
+</html>

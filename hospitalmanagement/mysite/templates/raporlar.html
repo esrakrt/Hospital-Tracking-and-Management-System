@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Raporlar</title>
+</head>
+<body>
+    <h1>Raporlar</h1>
+    {% for rapor in raporlar %}
+        <p>Rapor ID: {{ rapor.0 }}</p>
+        <p>Rapor URL: {{ rapor.3 }}</p>
+        <hr>
+    {% endfor %}
+    <a href="{% url 'rapor_ekle' hasta_id %}">Rapor Ekle</a>
+    <form method="get" action="{% url 'home' %}">
+        <button type="submit">Ana Sayfaya Dön</button>
+    </form>
+</body>
+</html>

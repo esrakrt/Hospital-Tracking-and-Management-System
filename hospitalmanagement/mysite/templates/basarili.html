@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Randevu Başarılı</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            color: #ff69b4;
+            text-align: center;
+            padding: 20px;
+        }
+        p {
+            text-align: center;
+            color: green;
+        }
+        button {
+            background-color: #ffb6c1;  /* Butonun arka plan rengi */
+            color: white;  /* Butonun yazı rengi */
+            border: none;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Randevu Başarılı</h1>
+    <p>{{ mesaj }}</p>
+    <form method="get" action="{% url 'home' %}">
+        <button type="submit">Ana Sayfaya Dön</button>
+    </form>
+</body>
+</html>

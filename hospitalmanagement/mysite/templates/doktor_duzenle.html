@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Doktor Düzenle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            color: #ff69b4 ;
+            text-align: center;
+        }
+        form {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            display: block;
+            width: 100%;
+            background-color:#ffb6c1;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #c71585;
+        }
+        button {
+            background-color: #ffb6c1;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function showMessage() {
+            alert("İşlem başarıyla gerçekleştirildi!");
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Doktor Düzenle</h1>
+        {% if mesaj %}
+        <p>{{ mesaj }}</p>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            Ad: <input type="text" name="ad" value="{{ doktor.1 }}"><br>
+            Soyad: <input type="text" name="soyad" value="{{ doktor.2 }}"><br>
+            Uzmanlık Alanı: <input type="text" name="uzmanlik_alani" value="{{ doktor.3 }}"><br>
+            Çalıştığı Hastane: <input type="text" name="calistigi_hastane" value="{{ doktor.4 }}"><br>
+            <input type="submit" value="Güncelle">
+        </form>
+        <form method="get" action="{% url 'home' %}">
+            <button type="submit">Ana Sayfaya Dön</button>
+        </form>
+    </div>
+</body>
+</html>
